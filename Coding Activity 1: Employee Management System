@@ -1,0 +1,78 @@
+class Employee:
+    def __init__(self, name, salary, position, department):
+        self.__name = name
+        self.__salary = salary
+        self.__position = position
+        self.__department = department
+
+    def get_name(self):
+        return self.__name
+    def get_salary(self):
+        return self.__salary
+    def get_position(self):
+        return self.__position
+    def get_department(self):
+        return self.__department
+
+    def set_salary(self, amount):
+        if amount > 0:
+            self.__salary = amount
+            return True
+        return False
+
+    def set_position(self, job):
+        if job != 0:
+            print(f"{self.__name}'s position has successfully been changed from {self.__position} to {job}")
+            self.__position = job
+            return True
+        elif self.__position != 0:
+            return True
+        else:
+            self.__position = "unknown. Please input a position"
+        return False
+
+    def apply_bonus(self, percent):
+        if percent > 0:
+            if self.__salary * (1+(percent*0.01)) < 200000:
+                self.__salary = (self.__salary * (1+(percent*0.01)))
+                return True
+        return False
+
+    def transfer_dept(self, transfer):
+        if transfer != 0:
+            print(f"{self.__name}'s department has successfully been changed from {self.__department} to {transfer}")
+            self.__department = transfer
+            return True
+        elif self.__department != 0:
+            return True
+        else:
+            self.__department = "unknown. Please input a position"
+        return False
+
+    def compare(self, other):
+        if self.__salary - other.get_salary() > 0:
+            print(f"{self.__name} makes {self.__salary - other.get_salary()} more than {other.__name}")
+            return True
+        else:
+            print(f"{other.__name} makes {-(self.__salary - other.get_salary())} more than {self.__name}")
+            return True
+
+    def display_info(self):
+        print(f"Employee name is {self.__name}, their salary is ${self.__salary}, and their position is {self.__position}. Their department is {self.__department}.")
+
+
+Employee1 = Employee("John", 500, "stupid", "A")
+Employee2 = Employee("Steve", 2000, "stupid", 0)
+
+Employee1.apply_bonus(50)
+Employee1.set_position("Cashier")
+Employee1.transfer_dept("B")
+
+Employee2.apply_bonus(0)
+Employee2.set_position(0)
+Employee2.transfer_dept(0)
+
+Employee1.display_info()
+Employee2.display_info()
+
+Employee1.compare(Employee2)
