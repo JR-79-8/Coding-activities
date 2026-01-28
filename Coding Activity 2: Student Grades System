@@ -1,0 +1,58 @@
+import sys
+class Student:
+    def __init__(self, name, grades, student_id):
+        self.__name = name
+        self.__grades = grades
+        self.__student_id = student_id
+
+    def get_name(self):
+        return self.__name
+
+    def get_grades(self):
+        return self.__grades
+
+    def get_student_id(self):
+        return self.__student_id
+
+    def set_grades(self):
+        length = range(len(self.__grades))
+        for i in length:
+            if self.__grades[i] < 0 or self.__grades[i] > 100:
+                print(f"{self.__name}'s {i+1}th grade is out of range")
+                sys.exit()
+        return True
+
+    def calculate_average(self):
+        return sum(self.__grades) / len(self.__grades)
+
+    def add_grade(self, grade):
+        if grade >= 0 and grade <= 100:
+            self.__grades.append(grade)
+            return True
+        else:
+            print(f"{self.__name}'s newest grade is out of range")
+            return False
+
+    def check_pass(self):
+        if self.calculate_average() >= 50:
+            print(f"{self.__name} is passing")
+        else:
+            print(f"{self.__name} is failing")
+
+    def display_info(self):
+        print(f"Student name is {self.__name}, their student id is {self.__student_id}, and their average grade is {self.calculate_average()}")
+
+Student1 = Student("John", [70, 50, 0, 29, 59, 78], "0001")
+Student2 = Student("Emily", [93, 89, 92, 93, 99, 95], "0002")
+
+Student1.set_grades()
+Student1.add_grade(60)
+print(Student1.get_grades())
+Student1.check_pass()
+
+Student2.set_grades()
+Student2.add_grade(96)
+Student2.check_pass()
+
+Student1.display_info()
+Student2.display_info()
